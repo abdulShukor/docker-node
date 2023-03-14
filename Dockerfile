@@ -1,15 +1,14 @@
-FROM node:18-alpine as base
-WORKDIR /code
+# syntax=docker/dockerfile:1
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
+FROM node:18-alpine
+ENV NODE_ENV=production
 
-FROM base as test
-RUN npm ci
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install --production
+
 COPY . .
-CMD [ "npm", "run", "test" ]
 
-FROM base as prod
-RUN npm ci --production
-COPY . .
 CMD [ "node", "server.js" ]
