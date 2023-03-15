@@ -32,7 +32,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
   deploy:
    runs-on: ubuntu-latest
-   need: [build]
+   needs: [build]
    
    steps:
      - name: deploying stuff
