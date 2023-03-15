@@ -30,3 +30,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
+  deploy:
+   runs-on: ubuntu-latest
+   need: [build]
+   
+   steps:
+     - name:deploying stuff
+       run: echo "going to deploy stuff"
